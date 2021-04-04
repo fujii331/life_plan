@@ -1,0 +1,65 @@
+version: "3"
+services:
+  mysql:
+    build:
+      context: "./docker"
+      dockerfile: "Dockerfile_mysql"
+    volumes:
+      - "./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf"
+      - "./docker/mysql/sqls:/docker-entrypoint-initdb.d"
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: my_app
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: my_app
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3307:3306"
+  nginx:
+    image: "nginx:mainline-alpine"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./docker/nginx/conf:/etc/nginx/"
+      - "..:/var/www/html"
+    environment:
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - phpfpm
+    links:
+      - phpfpm
+  phpfpm:
+    build:
+      context: "./docker"
+      dockerfile: "Dockerfile_phpfpm"
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - "..:/var/www/html"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+  host:
+    build:
+      context: "./docker"
+      dockerfile: "Dockerfile_php"
+    environment:
+      TZ: "Asia/Tokyo"
+      PRJ: "life_plan"
+    volumes:
+      - "..:/root"
+    ports:
+      - "8765:80"
+    depends_on:
+      - mysql
+      - phpfpm
+    links:
+      - mysql
+      - phpfpm
+
+volumes:
+  mysql-data:
+    driver: local
