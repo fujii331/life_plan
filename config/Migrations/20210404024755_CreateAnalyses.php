@@ -14,7 +14,7 @@ class CreateAnalyses extends AbstractMigration
     {
         $table = $this->table('analyses');
         $table->addColumn('current_age', 'integer', [
-                'default' => 28,
+                'default' => 20,
                 'limit' => 3,
                 'null' => false,
             ])
@@ -24,7 +24,7 @@ class CreateAnalyses extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('lifespan_age', 'integer', [
-                'default' => 80,
+                'default' => 90,
                 'limit' => 3,
                 'null' => false,
             ])
@@ -34,22 +34,22 @@ class CreateAnalyses extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('current_age_of_partner', 'integer', [
-                'default' => 27,
+                'default' => 20,
                 'limit' => 3,
                 'null' => true,
             ])
             ->addColumn('retirement_age_of_partner', 'integer', [
-                'default' => 32,
+                'default' => 65,
                 'limit' => 3,
                 'null' => true,
             ])
             ->addColumn('current_salary', 'integer', [
-                'default' => 4000000,
+                'default' => 3000000,
                 'limit' => 15,
                 'null' => false,
             ])
             ->addColumn('final_salary', 'integer', [
-                'default' => 7000000,
+                'default' => 5000000,
                 'limit' => 15,
                 'null' => false,
             ])
@@ -59,17 +59,17 @@ class CreateAnalyses extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('bonus', 'float', [
-                'default' => 2,
+                'default' => 3,
                 'limit' => 3,
                 'null' => true,
             ])
             ->addColumn('current_salary_of_partner', 'integer', [
-                'default' => 2200000,
+                'default' => 2000000,
                 'limit' => 15,
                 'null' => true,
             ])
             ->addColumn('final_salary_of_partner', 'integer', [
-                'default' => 2300000,
+                'default' => 5000000,
                 'limit' => 15,
                 'null' => true,
             ])
@@ -84,12 +84,12 @@ class CreateAnalyses extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('current_savings', 'integer', [
-                'default' => 2000000,
+                'default' => 10000000,
                 'limit' => 15,
                 'null' => true,
             ])
             ->addColumn('number_of_children', 'integer', [
-                'default' => 2,
+                'default' => 3,
                 'limit' => 3,
                 'null' => true,
             ])
